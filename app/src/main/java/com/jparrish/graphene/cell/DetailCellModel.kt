@@ -1,10 +1,10 @@
-package com.joelparrish.graphene.cell
+package com.jparrish.graphene.cell
 
 import android.view.View
-import com.joelparrish.graphene.R
-import com.joelparrish.graphene.core.CellModel
-import com.joelparrish.graphene.holder.DetailCellHolder
-import com.joelparrish.graphene.model.Detail
+import com.jparrish.graphene.R
+import com.jparrish.graphene.core.CellModel
+import com.jparrish.graphene.holder.DetailCellHolder
+import com.jparrish.graphene.model.Detail
 
 class DetailCellModel(val detail: Detail, val clickListener: (DetailCellModel) -> Unit) :
     CellModel<DetailCellHolder>(R.layout.cell_detail_card, partialBindEnabled = true) {

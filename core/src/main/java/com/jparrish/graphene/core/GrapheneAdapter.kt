@@ -1,4 +1,4 @@
-package com.joelparrish.graphene.core
+package com.jparrish.graphene.core
 
 import android.view.ViewGroup
 import androidx.collection.SparseArrayCompat

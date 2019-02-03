@@ -1,16 +1,16 @@
-package com.joelparrish.graphene
+package com.jparrish.graphene
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.joelparrish.graphene.adapter.rxjava2.RxCallbackAdapter
-import com.joelparrish.graphene.cell.DetailCellModel
-import com.joelparrish.graphene.cell.TextCellModel
-import com.joelparrish.graphene.core.CellModel
-import com.joelparrish.graphene.core.GrapheneAdapter
-import com.joelparrish.graphene.decorator.SpaceItemDecorator
-import com.joelparrish.graphene.model.Detail
+import com.jparrish.graphene.adapter.rxjava2.RxCallbackAdapter
+import com.jparrish.graphene.cell.DetailCellModel
+import com.jparrish.graphene.cell.TextCellModel
+import com.jparrish.graphene.core.CellModel
+import com.jparrish.graphene.core.GrapheneAdapter
+import com.jparrish.graphene.decorator.SpaceItemDecorator
+import com.jparrish.graphene.model.Detail
 import kotlinx.android.synthetic.main.activity_example.*
 import kotlinx.android.synthetic.main.content_example.*
 

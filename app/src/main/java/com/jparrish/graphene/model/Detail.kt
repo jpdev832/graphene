@@ -1,3 +1,3 @@
-package com.joelparrish.graphene.model
+package com.jparrish.graphene.model
 
 data class Detail(val title: String, val description: String)

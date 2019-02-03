@@ -1,4 +1,4 @@
-package com.joelparrish.graphene.decorator
+package com.jparrish.graphene.decorator
 
 import android.graphics.Rect
 import android.view.View

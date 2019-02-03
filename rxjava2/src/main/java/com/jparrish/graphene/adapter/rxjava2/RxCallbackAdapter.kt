@@ -1,7 +1,7 @@
-package com.joelparrish.graphene.adapter.rxjava2
+package com.jparrish.graphene.adapter.rxjava2
 
 import androidx.recyclerview.widget.DiffUtil
-import com.joelparrish.graphene.core.CallbackAdapter
+import com.jparrish.graphene.core.CallbackAdapter
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposables

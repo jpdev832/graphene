@@ -1,4 +1,4 @@
-package com.joelparrish.graphene.holder
+package com.jparrish.graphene.holder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
