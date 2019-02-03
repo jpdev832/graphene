@@ -1,5 +1,8 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
 apply from: rootProject.file('module.gradle')
+
+group='com.github.jpdev832.graphene'
 
 dependencies {
     implementation project(":core")
