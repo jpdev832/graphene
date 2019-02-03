@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
 class CellDiffCallback(
-    private val oldModels: List<Pair<Any, Int>>,
+    private val oldModels: List<Pair<String, Int>>,
     private val newModels: List<CellModel<out RecyclerView.ViewHolder>>
 ) : DiffUtil.Callback() {
 

@@ -9,18 +9,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import java.util.*
 
-class Adapter constructor(
+class GrapheneAdapter constructor(
     private val callbackAdapter: CallbackAdapter = DefaultCallbackAdapter()
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), LifecycleObserver {
 
     val cellModels = ArrayList<CellModel<out RecyclerView.ViewHolder>>()
 
     private val cellTypeMap = SparseArrayCompat<CellModel<out RecyclerView.ViewHolder>>()
-    private val stateMap = mutableListOf<Pair<Any, Int>>()
-
-    init {
-        setHasStableIds(true)
-    }
+    private val stateMap = mutableListOf<Pair<String, Int>>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return cellTypeMap.get(viewType)!!.createViewHolder(parent)

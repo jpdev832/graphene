@@ -6,7 +6,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import java.util.*
 
-abstract class CellModel<T : androidx.recyclerview.widget.RecyclerView.ViewHolder>(var itemResourceId: Int) {
+abstract class CellModel<T : androidx.recyclerview.widget.RecyclerView.ViewHolder>(
+    var itemResourceId: Int,
+    val partialBindEnabled: Boolean = false
+) {
+    /**
+     * Default payload used to trigger partial bindings
+     */
+    companion object {
+        val PAYLOAD = object {}
+    }
+
     /**
      * Create a unique identifier for the cell model.
      */
@@ -17,23 +27,22 @@ abstract class CellModel<T : androidx.recyclerview.widget.RecyclerView.ViewHolde
      *
      * This method is called from [createViewHolder].
      *
-     * @param view parent view obtained from the [DynamicAdapter]
+     * @param view parent view obtained from the [GrapheneAdapter]
      * @return cell model view holder
      */
     abstract fun createItemViewHolder(view: View): T
 
     /**
-     * Binds view holder when only specific elements have changed. The payload includes the data
-     * that was set in [getChangePayload].
+     * Binds view holder when only specific elements have changed.
      *
      * This method is called from [bindViewHolder].
      *
      * @param holder cell model view holder
      * @param absPosition absolute position in the [RecyclerView]
-     * @param payloads payload obtained from [getChangePayload]
-     * @return boolean representing whether the bind process was handled
      */
-    abstract fun bindItemViewHolder(holder: T, absPosition: Int, payloads: MutableList<Any>): Boolean
+    open fun partialBindItemViewHolder(holder: T, absPosition: Int) {
+        bindViewHolder(holder, absPosition)
+    }
 
     /**
      * Binds view holder.
@@ -46,14 +55,7 @@ abstract class CellModel<T : androidx.recyclerview.widget.RecyclerView.ViewHolde
     abstract fun bindItemViewHolder(holder: T, absPosition: Int)
 
     /**
-     * Get the view type id that represents this cell models specific view type.
-     *
-     * @return view type of cell model
-     */
-    abstract fun getViewTypeId(): Int
-
-    /**
-     * Bind method called from the [DynamicAdapter] when a payload is available.
+     * Bind method called from the [GrapheneAdapter] when a payload is available.
      *
      * @param holder the [RecyclerView.ViewHolder] instance for this cell model
      * @param absPosition absolute position in the [RecyclerView]
@@ -66,11 +68,14 @@ abstract class CellModel<T : androidx.recyclerview.widget.RecyclerView.ViewHolde
         absPosition: Int,
         payloads: MutableList<Any>
     ): Boolean {
-        return bindItemViewHolder(holder as T, absPosition, payloads)
+        return if (partialBindEnabled) {
+            partialBindItemViewHolder(holder as T, absPosition)
+            true
+        } else false
     }
 
     /**
-     * Bind method called from the [DynamicAdapter] when no payload is available.
+     * Bind method called from the [GrapheneAdapter] when no payload is available.
      *
      * @param holder the [RecyclerView.ViewHolder] instance for this cell model
      * @param absPosition absolute position in the [RecyclerView]
@@ -81,7 +86,7 @@ abstract class CellModel<T : androidx.recyclerview.widget.RecyclerView.ViewHolde
     }
 
     /**
-     * Creates a new view holder when [DynamicAdapter] needs a new instance.
+     * Creates a new view holder when [GrapheneAdapter] needs a new instance.
      *
      * @param parent parent view group
      * @return view holder for the cell model
@@ -92,22 +97,28 @@ abstract class CellModel<T : androidx.recyclerview.widget.RecyclerView.ViewHolde
     }
 
     /**
+     * Get a payload that that triggers a partial bind.
+     *
+     * @return a data object representing a change in data
+     */
+    fun getChangePayload(): Any? {
+        return if (partialBindEnabled) PAYLOAD else null
+    }
+
+    /**
+     * Get the view type id that represents this cell models specific view type.
+     *
+     * @return view type of cell model
+     */
+    open fun getViewTypeId(): Int = itemResourceId
+
+    /**
      * Unique hash code representing the content held by the cell model.
      *
-     * This method is used by [DynamicCellDiffCallback.areContentsTheSame] to determine if the cell
+     * This method is used by [CellDiffCallback.areContentsTheSame] to determine if the cell
      * has change at all.
      *
      * @return hash code representing the data held by the model
      */
     open fun getContentHashCode(): Int = 0
-
-    /**
-     * Get a payload that contains elements that were changed. By default, this will return null.
-     * Forcing the adapter to call bindViewHolder without a payload.
-     *
-     * @return a data object representing the differences between this model and the new model
-     */
-    open fun getChangePayload(): Any? {
-        return null
-    }
 }
