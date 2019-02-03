@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/jpdev832/graphene.svg)](https://jitpack.io/#jpdev832/graphene)
+
 # graphene
 
 Graphene is a modular take on the classic RecyclerView adapter that takes advantage of DiffUtil. With Graphene, you no longer need to write individual adapters for each list of items you want to display in a Recyclerview. Graphene instead supports `CellModels`. These are an abstract representation of a view you want to display in a recyclerview. You can create any number of `CellModels` representations, and render them all using the same Graphene adapter.
