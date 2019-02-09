@@ -37,7 +37,15 @@ class GrapheneAdapter constructor(
     override fun getItemViewType(position: Int) = cellModels[position].getViewTypeId()
 
     fun updateCells(newModels: List<CellModel<out RecyclerView.ViewHolder>>) {
+        cancel()
         callbackAdapter.calculate(CellDiffCallback(stateMap, newModels)) { onResult(it, newModels) }
+    }
+
+    /**
+     * Notify that cells have been updated
+     */
+    fun notifyUpdated() {
+        updateCells(cellModels.toList())
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
