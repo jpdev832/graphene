@@ -20,7 +20,7 @@ abstract class CellModel<T : androidx.recyclerview.widget.RecyclerView.ViewHolde
     /**
      * Create a unique identifier for the cell model.
      */
-    var id: String = UUID.randomUUID().toString()
+    open var id: String = UUID.randomUUID().toString()
 
     /**
      * Creates a new view holder for this cell model.
