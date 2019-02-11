@@ -12,7 +12,7 @@ class CellDiffCallback(
     override fun getNewListSize() = newModels.size
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldModels[oldItemPosition].first === newModels[newItemPosition].id
+        return oldModels[oldItemPosition].first == newModels[newItemPosition].id
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
